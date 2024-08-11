@@ -80,7 +80,7 @@ regd_users.put("/auth/review/:isbn", (req, res) => {
   }
 });
 
-// Add review from current user and requested book ISBN
+// Delete review from current user and requested book ISBN
 regd_users.delete("/auth/review/:isbn", (req, res) => {
   const isbn = req.params.isbn;
   if (books[isbn]) {

@@ -26,8 +26,10 @@ public_users.post("/register", (req, res) => {
   return res.status(404).json({ message: "Unable to register customer." });
 });
 
+// Promise to get all Books from Books object
 const getBooks = new Promise((resolve, reject) => {
   const booksLength = Object.keys(books).length;
+  // Resolve promise only if books object contains elements
   if (booksLength > 0) {
     resolve(JSON.stringify(books, null, 4));
   } else {
