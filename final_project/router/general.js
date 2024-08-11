@@ -26,11 +26,20 @@ public_users.post("/register", (req, res) => {
   return res.status(404).json({ message: "Unable to register customer." });
 });
 
+const getBooks = new Promise((resolve, reject) => {
+  const booksLength = Object.keys(books).length;
+  if (booksLength > 0) {
+    resolve(JSON.stringify(books, null, 4));
+  } else {
+    reject("Books DB empty");
+  }
+});
+
 // Get the book list available in the shop
 public_users.get("/", async function (req, res) {
   try {
-    const result = JSON.stringify(books, null, 4);
-    return res.send(await result);
+    const result = await getBooks;
+    return res.send(result);
   } catch (err) {
     res.status(404).send("Error getting books list: " + err);
   }
